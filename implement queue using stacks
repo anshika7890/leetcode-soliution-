@@ -1,0 +1,41 @@
+class Node:
+    def __init__(self, data=None):
+        self.value = data
+        self.next = None
+
+
+class MyQueue:
+
+    def __init__(self):
+        self.start = None
+        self.end = None
+
+    def push(self, x: int) -> None:
+        temp = Node(x)
+
+        if self.start is None:
+            self.start = self.end = temp
+        else:
+            self.end.next = temp
+            self.end = temp
+
+    def pop(self) -> int:
+        if self.start is None:
+            return None   # queue empty case
+
+        data = self.start.value
+
+        if self.start.next is None:
+            self.start = self.end = None
+        else:
+            self.start = self.start.next
+
+        return data
+
+    def peek(self) -> int:
+        if self.start is None:
+            return None
+        return self.start.value
+
+    def empty(self) -> bool:
+        return self.start is None
